@@ -2,17 +2,21 @@ import React, {useCallback, useState} from 'react'
 import {Button, Grid, TextInput, TextInputProps,} from '@mantine/core'
 import PublicIcon from '@material-ui/icons/Public';
 import axios from 'axios'
+import {Loader} from '@mantine/core';
 
 interface ShortenInputFieldProps extends TextInputProps {
     onShortened: (id: string) => unknown
 }
 
 export default function ShortenField(props: ShortenInputFieldProps) {
+    const [isLoading, setIsLoading] = useState<boolean>(false)
     const [url, setUrl] = useState<string>('')
 
     const onShortened = props.onShortened
 
     const shorten = useCallback(() => {
+        setIsLoading(true);
+
         axios
             .post('/api/shorten', {
                 url,
@@ -23,6 +27,7 @@ export default function ShortenField(props: ShortenInputFieldProps) {
             .catch((err) => {
                 console.error(err)
             })
+            .finally(() => setIsLoading(false))
     }, [url, onShortened])
 
     return (
@@ -46,7 +51,7 @@ export default function ShortenField(props: ShortenInputFieldProps) {
                     }}
                     onClick={() => shorten()}
                 >
-                    Shorten
+                    {isLoading ? <Loader/> : 'Shorten'}
                 </Button>
             </Grid.Col>
         </Grid>
