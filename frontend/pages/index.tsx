@@ -22,7 +22,6 @@ const Home: NextPage = () => {
                 <meta property="og:image" content="https://gotogo.click/photo-1517404215738-15263e9f9178.jpeg"/>
             </Head>
             <div>
-                <img src={'/photo-1517404215738-15263e9f9178.jpeg'}/>
                 <ShortenField
                     onShortened={(id) => setShortenedUrl(`${getOrigin()}${router.asPath}go/${id}`)}/>
                 <ShortenedResultWithCopyToClipboard url={shortenedUrl}/>
