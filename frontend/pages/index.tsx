@@ -18,7 +18,7 @@ const Home: NextPage = () => {
                 <title>URL shortener - gotogo.click</title>
                 <meta property="og:type" content="website"/>
                 <meta property="og:title" content="URL Shortener"/>
-                <meta property="og:description" content="undefined"/>
+                <meta property="og:description" content="Shortening URLs - made easy"/>
                 <meta property="og:image" content="https://gotogo.click/photo-1517404215738-15263e9f9178.jpeg"/>
             </Head>
             <div>
