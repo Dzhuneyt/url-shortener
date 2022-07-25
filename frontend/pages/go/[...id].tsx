@@ -14,7 +14,7 @@ const GoToUrl: NextPage<{
     useEffect(() => {
         setTimeout(() => {
             window.location.href = props.url
-        }, 3000)
+        }, 1000)
     }, [props.url])
 
     return <>
