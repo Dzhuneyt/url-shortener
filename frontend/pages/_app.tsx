@@ -1,6 +1,6 @@
 import {AppProps} from 'next/app'
 import Head from 'next/head'
-import {MantineProvider} from '@mantine/core'
+import {Box, Center, MantineProvider} from '@mantine/core'
 
 export default function App(props: AppProps) {
     const {Component, pageProps} = props
@@ -23,16 +23,19 @@ export default function App(props: AppProps) {
                     colorScheme: 'light',
                 }}
             >
-                <div
+                <Box
                     style={{
                         maxWidth: '1024px',
                         margin: 'auto',
-                        minHeight: '100vh'
                     }}
                 >
-                    <h1>URL Shortener</h1>
-                    <Component {...pageProps} />
-                </div>
+                    <Center style={{minHeight: '20vh'}}>
+                        <h1>URL Shortener</h1>
+                    </Center>
+                    <Box style={{minHeight: '70vh'}}>
+                        <Component {...pageProps} />
+                    </Box>
+                </Box>
             </MantineProvider>
         </>
     )

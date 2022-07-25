@@ -4,6 +4,8 @@ import React, {useState} from 'react'
 import ShortenField from '../components/ShortenField'
 import {ShortenedResultWithCopyToClipboard} from "../components/ShortenedResultWithCopyToClipboard";
 import {getOrigin} from "../util/getOrigin";
+import {Center} from "@mantine/core";
+import Footer from "../components/Footer";
 
 const Home: NextPage = () => {
     const [shortenedUrl, setShortenedUrl] = useState<string>('')
@@ -11,9 +13,14 @@ const Home: NextPage = () => {
 
     return (
         <>
-            <ShortenField
-                onShortened={(id) => setShortenedUrl(`${getOrigin()}${router.asPath}go/${id}`)}/>
-            <ShortenedResultWithCopyToClipboard url={shortenedUrl}/>
+            <div>
+                <ShortenField
+                    onShortened={(id) => setShortenedUrl(`${getOrigin()}${router.asPath}go/${id}`)}/>
+                <ShortenedResultWithCopyToClipboard url={shortenedUrl}/>
+            </div>
+            <Center style={{minHeight: '10vh'}}>
+                <Footer/>
+            </Center>
         </>
     )
 }
