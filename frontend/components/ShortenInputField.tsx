@@ -4,6 +4,9 @@ import {
   TextInputProps,
   ActionIcon,
   useMantineTheme,
+  Button,
+  Group,
+  Grid,
 } from '@mantine/core'
 import Http from '@material-ui/icons/Http'
 import PlayArrow from '@material-ui/icons/PlayArrow'
@@ -15,66 +18,48 @@ interface ShortenInputFieldProps extends TextInputProps {
 }
 
 export default function ShortenInputField(props: ShortenInputFieldProps) {
-  const theme = useMantineTheme()
-  const router = useRouter()
-
   const [url, setUrl] = useState<string>('')
-  const [shortenedUrl, setShortenedUrl] = useState<string>('')
 
-  const save = useCallback(() => {
+  const theme = useMantineTheme()
+  const onShortened = props.onShortened
+
+  const shorten = useCallback(() => {
     axios
       .post('/api/shorten', {
         url,
       })
       .then((result) => {
-        const origin =
-          typeof window !== 'undefined' && window.location.origin
-            ? window.location.origin
-            : ''
-        setShortenedUrl(`${origin}${router.asPath}go/${result.data.id}`)
+        onShortened(result.data.id)
       })
       .catch((err) => {
         console.error(err)
       })
-  }, [url, router])
+  }, [url, onShortened])
 
   return (
-    <>
-      <TextInput
-        icon={<Http />}
-        radius="xl"
-        size="md"
-        onChange={(e) => {
-          setUrl(e.target.value)
-        }}
-        rightSection={
-          <ActionIcon
-            size={32}
-            radius="xl"
-            color={theme.primaryColor}
-            variant="filled"
-            onClick={() => save()}
-          >
-            <PlayArrow />
-          </ActionIcon>
-        }
-        placeholder="URL"
-        rightSectionWidth={42}
-        {...props}
-      />
-      {shortenedUrl && (
-        <>
-          <br />
-          <TextInput
-            radius="xl"
-            size="md"
-            readOnly={true}
-            placeholder="URL"
-            rightSectionWidth={42}
-            value={shortenedUrl}
-          />
-        </>
-      )}
-    </>
+    <Grid grow>
+      <Grid.Col span={10}>
+        <TextInput
+          icon={<Http />}
+          radius="xl"
+          size="md"
+          onChange={(e) => setUrl(e.target.value)}
+          placeholder="URL"
+        />
+      </Grid.Col>
+      <Grid.Col span={2}>
+        <Button
+          variant="light"
+          radius="xl"
+          size="md"
+          styles={{
+            root: { height: 48, width: '100%' },
+          }}
+          onClick={() => shorten()}
+        >
+          Shorten
+        </Button>
+      </Grid.Col>
+    </Grid>
   )
 }
