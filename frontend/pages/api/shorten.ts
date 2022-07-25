@@ -1,7 +1,7 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import { collection, doc, getFirestore, setDoc } from "@firebase/firestore";
 import type { NextApiRequest, NextApiResponse } from "next";
-import { firebaseApp } from "../../components/firebaseApp";
+import { firebaseApp } from "../../util/firebaseApp";
 
 type ShortenResponse = {
   id: string;

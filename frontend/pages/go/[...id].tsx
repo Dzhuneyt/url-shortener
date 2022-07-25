@@ -1,7 +1,7 @@
 import { collection, doc, getDoc, getFirestore } from '@firebase/firestore'
 import { GetServerSideProps, NextPage } from 'next'
 import { useEffect } from 'react'
-import { firebaseApp } from '../../components/firebaseApp'
+import { firebaseApp } from '../../util/firebaseApp'
 
 const firestore = getFirestore(firebaseApp)
 
