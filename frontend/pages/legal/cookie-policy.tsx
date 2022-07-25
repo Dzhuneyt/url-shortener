@@ -4,7 +4,7 @@ const CookiePolicy: NextPage = () => {
     return <>
         <h3>Cookie Policy</h3>
         <p>This site does not collect any cookies for tracking, analytics or other purposes, beyond the ones required to
-            technically support the product's features.</p>
+            technically support the product&apos;s features.</p>
     </>
 }
 
